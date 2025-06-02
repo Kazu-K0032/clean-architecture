@@ -1,0 +1,25 @@
+## Interface Adapter層
+
+- よく使用されるディレクトリの名前
+    - interfaces/, handler/, controller/
+        - Webのコントローラー
+    - infrastructure/, repository_impl/
+        - リポジトリの実装
+            - オブジェクトの保存・取得・更新を行うデータアクセスの窓口
+            - DBやAPIなどのデータソースの中身に直接依存せず、オブジェクトとしてデータを扱う為の抽象層
+    - presenter/, response/
+        - プレゼンター（出力変換）
+- 特徴
+    - UseCaseと外部との橋渡しをする層
+        - DB・API・Webリクエストなどの入出力を抽象化して受け渡す
+    - インターフェースの実装を書く
+        - UserRepositoryなどのインターフェースに対して、実際の処理を記述する
+    - 変換や整形を行うことも多い
+        - DTO → Entity変換など
+- Interface Adapterに書いてはいけないこと
+    - ビジネスロジックを書くこと（年齢判定など）
+        - エンティティやUseCase層に書くべき
+    - ユースケース全体の処理フロー
+        - UseCase層に分離するべき
+    - データベース接続設定
+        - configやframework層に分離する

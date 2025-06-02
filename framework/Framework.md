@@ -1,0 +1,25 @@
+## Framework層
+
+- 概要
+    - Webフレームワーク、ORM、メール送信、DB送信、設定ファイル読み込みなど、技術的な詳細に強く依存する部分をまとめた層
+- よく使用されるディレクトリの名前
+    - main.py, server/, framework/
+        - Webサーバーの起動・ルーティング
+    - config/, settings/, bootstrap/
+        - DB接続設定・読み込み処理
+    - di/, entrypoint/
+        - DI・初期化ロジック
+- 特徴
+    - 最外層の技術依存ロジック
+        - FastAPI、Django、環境変数など
+    - アプリケーションの起点
+        - main.py
+    - 他層に依存する
+        - Entity, UseCaseを使ってリクエスト処理を行う
+- Framework層に書いてはいけないこと
+    - ビジネスロジックを書くこと
+        - EntityやUseCaseにあるべき内容
+    - 永続化ロジック（SQL発行）
+        - リポジトリの実装に分離するべき（Interface Adapter層）
+    - 業務フロー（ユーザー登録 ⇒ 通知）
+        - UseCase層に置くべきロジックのため
